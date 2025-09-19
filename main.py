@@ -8,12 +8,12 @@ st.caption("Note that this is only demo app not actually connected with LLMs")
 
 # initally we need to initalie chat history
 if "messages" not in st.session_state:
-    st.session_state.messages = [{"role" : "assistant", "content": "Let's start chatting!.."}]
+    st.session_state.messages = [{"role" : "assistant", "content": "Let's start chatting!.."}, {"role" : "user", "content" : "Oh, Cool what's up?"}]
 
 # Display chat messages from history on app rerun
-# for message in st.session_state.messages:
-#     with st.chat_message(message["role"]):
-#         st.markdown(message["content"])
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
 
 # accept user input
 if prompt := st.chat_input("What is up?"):
@@ -41,7 +41,7 @@ if prompt := st.chat_input("What is up?"):
         # now simulate stream of response with miliiseconds delay
         for chunk in assistant_response.split():
             full_response += chunk + " "
-            time.sleep(2)
+            time.sleep(1.2)
             # add a blinking cursor to simulate typing
             message_placeholder.markdown(full_response + "▌")
         message_placeholder.markdown(full_response)
